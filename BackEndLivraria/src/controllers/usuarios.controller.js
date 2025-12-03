@@ -1,5 +1,6 @@
 import { db } from "../config/db.js"
 import bcrypt from 'bcrypt';
+import usuario from '../models/usuario.js';
 
 // ============================
 //  Rotas CRUD
@@ -14,12 +15,12 @@ const criarUsuario = async (req, res) => {
     // 1. Desestruturar os dados enviados do Front-End
     const {
         nome,
-        sobrenome,
         email,
         telefone,
         dataNascimento,
         senha
     } = req.body;
+
 
     // ⚠️ Adicione uma validação básica para garantir que todos os campos obrigatórios vieram
     if (!email || !senha || !nome) {
@@ -27,34 +28,41 @@ const criarUsuario = async (req, res) => {
     }
 
     try {
+        // ⚠️ 1. VERIFICAR se o e-mail já existe
+        const usuarioExistente = await usuario.findOne({ where: { email } });
+        if (usuarioExistente) {
+            return res.status(409).json({ message: "Este e-mail já está cadastrado." });
+        }
+
         // --- 🔒 Lógica de Segurança e Banco de Dados ---
 
-        const salt = await bcrypt.genSalt(10);
+        // const salt = await bcrypt.genSalt(10);
 
         // Exemplo: Criptografar a senha
-        const senhaCriptografada = await bcrypt.hash(senha, 10);
+        // const senhaCriptografada = await bcrypt.hash(senha, 10);
 
         // Exemplo: Salvar no banco de dados
-        const novoUsuario = await SeuModeloDeUsuario.create({
-            nome,
-            sobrenome,
-            email,
-            telefone,
-            dataNascimento,
-            senha: senhaCriptografada // Salve a senha criptografada!
-        });
+        // const novoUsuario = await SeuModeloDeUsuario.create({
+        //     nome,
+        //     sobrenome,
+        //     email,
+        //     telefone,
+        //     dataNascimento,
+        //     senha: senhaCriptografada // Salve a senha criptografada!
+        // });
 
         // --- Fim da Lógica ---
 
-        // await db.execute(
-        //     "INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)",
-        //     [nome, email, senha]
-        // );
+        await db.execute(
+            "INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)",
+            [nome, email, senha]
+        );
 
         // 2. Resposta de Sucesso (Status 201 Created)
         return res.status(201).json({
             message: "Usuário cadastrado com sucesso!",
-            email: email
+            id: novoUsuario.id,
+            email: novoUsuario.email
         });
     } catch (error) {
         // Se houver erro de duplicidade de e-mail (ou outro erro do banco)

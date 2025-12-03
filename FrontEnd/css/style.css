@@ -4,7 +4,7 @@ body {
 }
 
 .navBar {
-    background-image: url(../public/images/ICONS/fundoazul.png);
+    background-image: url(../public/images/fundoazul.png);
     background-size: cover;
     display: flex;
     align-items: center;

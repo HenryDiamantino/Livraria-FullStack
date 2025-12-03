@@ -84,7 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 1. Coletar os valores dos campos
             const nome = document.getElementById('nome').value;
-            const sobrenome = document.getElementById('sobrenome').value;
             const email = document.getElementById('email').value;
             const telefone = document.getElementById('telefone').value;
             const dataNascimento = document.getElementById('data-nascimento').value;
@@ -105,7 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // 2. Montar o objeto de dados a ser enviado
             const novoUsuario = {
                 nome: nome,
-                sobrenome: sobrenome,
                 email: email,
                 telefone: telefone,
                 dataNascimento: dataNascimento,
