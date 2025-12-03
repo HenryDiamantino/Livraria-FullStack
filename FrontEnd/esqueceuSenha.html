@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="./css/esqueceu.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Cadastro</title>
+</head>
+
+<body>
+    <div class="password-container">
+        <!-- Imagem centralizada no topo -->
+        <div class="logo-container">
+            <img src="./public/images/Logosolo.svg" alt="Logo da Empresa" class="logo">
+        </div>
+
+        <h1>Recuperar Senha</h1>
+
+        <p class="description">
+            Digite seu e-mail cadastrado e enviaremos um link para redefinir sua senha.
+        </p>
+
+        <!-- Mensagem de sucesso (inicialmente oculta) -->
+        <div class="success-message" id="successMessage">
+            ✅ E-mail enviado com sucesso! Verifique sua caixa de entrada.
+        </div>
+
+        <div class="steps">
+            <h3>Como funciona:</h3>
+            <ol>
+                <li>Digite seu e-mail cadastrado</li>
+                <li>Clique em "Enviar Link de Recuperação"</li>
+                <li>Verifique sua caixa de entrada</li>
+                <li>Siga as instruções do e-mail recebido</li>
+            </ol>
+        </div>
+
+        <form id="recoveryForm" onsubmit="return processarRecuperacao(event)">
+            <div class="form-group">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" placeholder="usuario@exemplo.com" required>
+            </div>
+
+            <button type="submit" class="recover-button">Enviar Link de Recuperação</button>
+        </form>
+
+        <div class="back-link">
+            <a href="login.html">
+                ← Voltar para o Login
+            </a>
+        </div>
+    </div>
+
+</body>
+<script src="./js/app.js"></script>
+
+</html>
